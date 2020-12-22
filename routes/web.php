@@ -29,6 +29,7 @@ Route::group(['prefix' => 'cities'], function () {
     Route::get('/edit/{id}', [CitiesController::class, 'edit'])->name('cities.edit');
     Route::post('/edit/{id}', [CitiesController::class, 'update'])->name('cities.update');
     Route::get('/destroy/{id}', [CitiesController::class, 'destroy'])->name('cities.destroy');
+    Route::get('/filter', [CitiesController::class, 'checkCreate'])->name('cities.checkCreate');
 });
 
 

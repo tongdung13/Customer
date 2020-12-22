@@ -110,9 +110,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="header-main">
 					<div class="header-left">
 							<div class="logo-name">
-									 <a href="{{ '/' }}"> <h1>Home</h1>
+									 <a href="{{ route('customers.index') }}"> <h1>Home</h1>
 									<!--<img id="logo" src="" alt="Logo"/>-->
-								  </a>
+                                  </a>
+
 							</div>
 							<!--search-box-->
 								<div class="search-box">
@@ -121,7 +122,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<input type="text" placeholder="Search..." name="search" required="">
 										<input type="submit" value="">
 									</form>
-								</div><!--//end-search-box-->
+                                </div><!--//end-search-box-->
+                                <div class="logo-name">
+                                     <a href="{{ route('cities.index') }}"><h1>City</h1></a>
+                                </div>
 							<div class="clearfix"> </div>
 						 </div>
 						 <div class="header-right">

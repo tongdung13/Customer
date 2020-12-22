@@ -3,6 +3,28 @@
 @section('title', 'List Customer')
 
 @section('content')
+    <a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#cityModal">
+        Loc
+    </a>
+         <div class="col-12">
+             @if(Session::has('success'))
+             <p class="text-success">
+                 <i class="fa fa-check" aria-hidden="true"></i>
+                 {{ Session::get('success') }}
+             </p>
+             @endif
+
+             @if(isset($totalCustomerFilter))
+             <span class="text-muted">{{ "tim thay " . '' . $totalCustomerFilter . '' . 'khach hang'}}</span>
+             @endif
+
+             @if(isset($cityFilter))
+             <div class="pl-5">
+                 <span class="text-muted"><i class="fa fa-check" aria-hidden="true"></i>{{ 'thuoc tinh' . '' . $cityFilter->name }}</span>
+             </div>
+             @endif
+         </div>
+         </div>
 
 
             <div class="table">
@@ -20,6 +42,11 @@
                     </tr>
                     </thead>
                     <tbody>
+                        @if(count($customers) == 0)
+                        <tr>
+                            <td colspan="7" class="text-center">khong co du ieu</td>
+                        </tr>
+                        @else
                         @foreach($customers as $key => $customer)
                             <tr>
                                 <th scope="col">{{ ++$key }}</th>
@@ -38,9 +65,10 @@
                                 </td>
                             </tr>
                         @endforeach
-
+                    @endif
                     </tbody>
                 </table>
+
                 <div class="col-12">
                     <div class="row">
                         <div class="col-9">
@@ -52,7 +80,7 @@
                     </div>
                 </div>
             </div>
-    
+
 
 
       <!-- Modal -->

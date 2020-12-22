@@ -47,6 +47,16 @@
                 <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Cancel</button>
                 </form>
             </div>
+            <div class="error-message">
+                @if($errors->any())
+                @foreach($errors->all() as $nameError)
+                <p style="color: red">{{ $nameError }}</p>
+
+                @endforeach
+                @else
+                <p style="color: green">{{ (isset($success)) ? $success : '' }}</p>
+                @endif
+                </div>
         </div>
     </div>
 

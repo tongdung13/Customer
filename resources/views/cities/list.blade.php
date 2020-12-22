@@ -1,18 +1,11 @@
-@extends('home')
+@extends('lists')
 
 @section('title', 'City List')
 
 
 @section('content')
 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                City List
-            </div>
-            <div class="card-header">
-                <a href="{{ '/' }}" class="btn btn-primary">Home</a>
-            </div>
+
             <div class="table">
                 <table class="table table-striped">
                     <thead>
@@ -25,17 +18,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($citis) == 0)
+                        @if(count($cities) == 0)
                         <tr>
                             <td colspan="4"> no customer</td>
                         </tr>
                         @else
 
-                        @foreach($citis as $key => $citi)
+                        @foreach($citis as $key => $citie)
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
-                                <td>{{ $citi->name }}</td>
-                                <td>{{ count($citi->customers) }}</td>
+                                <td>{{ $citie->name }}</td>
+                                <td>{{ count($citie->customers) }}</td>
                                 <td>
                                     <a href="{{ route('cities.edit', $citi->id) }}" class="btn btn-primary">Update</a>
                                 </td>
@@ -50,8 +43,8 @@
                 </table>
                 <a href="{{ route('cities.create') }}" class="btn btn-success">Add</a>
             </div>
-        </div>
-    </div>
+
+
 
 
 

@@ -14,7 +14,7 @@ class Customer extends Model
         'dob',
         'email',
         'city_id',
-        'image'
+        'image',
     ];
 
 

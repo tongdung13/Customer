@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CitiesExampleRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,8 @@ class CitiesController extends Controller
 {
     public function index()
     {
-        $citis = City::all();
-        return view('cities.list', compact('citis'));
+        $cities = City::all();
+        return view('cities.list', compact('cities'));
     }
 
     public function create()
@@ -18,13 +19,13 @@ class CitiesController extends Controller
         return view('cities.create');
     }
 
-    public function store(Request $request)
+    public function store(CitiesExampleRequest $request)
     {
         $city = new City();
         $city->fill($request->all());
         $city->save();
 
-        return redirect()->route('cities.index');
+        return redirect()->route('customers.index');
 
     }
 
@@ -34,7 +35,7 @@ class CitiesController extends Controller
         return view('cities.edit', compact('city'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CitiesExampleRequest $request, $id)
     {
         $city = City::findOrFail($id);
         $city->fill($request->all());
@@ -51,7 +52,10 @@ class CitiesController extends Controller
         return redirect()->route('cities.index');
     }
 
-
+    public function checkCreate(CitiesExampleRequest $request) {
+        $success = "them du lieu thanh cong";
+        return view('cities.create', compact('success'));
+    }
 
 
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerExampleRequest;
 use App\Models\City;
 use App\Models\Customer;
 use FFI;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
@@ -17,13 +19,28 @@ class CustomerController extends Controller
         return view('customers.list', compact('customers', 'city'));
     }
 
+    public function filterByCity(Request $request)
+    {
+        $idCity = $request->input('city_id');
+
+        $cityFilter = City::findOrFail($idCity);
+
+        $customers = Customer::where('city_id', $cityFilter->id)->get();
+        $totalCustomerFilter = count($customers);
+
+        $city = City::all();
+
+        return view('customers.list', compact('customers', 'city', 'totalCustomerFilter', 'cityFilter'));
+    }
+
+
     public function create()
     {
         $city = City::all();
         return view('customers.create', compact('city') );
     }
 
-    public function store(Request $request)
+    public function store(CustomerExampleRequest $request)
     {
         $customer = new Customer();
         $customer->fill($request->all());
@@ -48,7 +65,7 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer', 'city'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CustomerExampleRequest $request, $id)
     {
         $customer = Customer::findOrFail($id);
         $customer->fill($request->all());
@@ -67,7 +84,7 @@ class CustomerController extends Controller
         }
 
         $customer->save();
-
+        Session::flash('success', 'cap nhap thanh cong');
         return redirect()->route('customers.index');
     }
 
@@ -80,19 +97,6 @@ class CustomerController extends Controller
         return redirect()->route('customers.index');
     }
 
-    public function filterByCity(Request $request)
-    {
-        $idCity = $request->input('city_id');
-
-        $cityFilter = City::findOrFail($idCity);
-
-        $customers = Customer::where('city_id', $cityFilter->id)->get();
-        $totalCustomerFilter = count($customers);
-
-        $city = City::all();
-
-        return view('customers.list', compact('customers', 'city', 'totalCustomerFilter', 'cityFilter'));
-    }
 
     public function search(Request $request)
     {
@@ -107,6 +111,16 @@ class CustomerController extends Controller
         return view('customers.list', compact('customers', 'city'));
     }
 
+    public function checkCreate(CustomerExampleRequest $request)
+    {
+        $success = "them du lieu thang cong";
+        return view('customers.create', compact('success'));
+    }
 
+    public function checkUpdate(CustomerExampleRequest $request)
+    {
+        $success = "them du lieu thang cong";
+        return view('customers.edit', compact('success'));
+    }
 
 }
