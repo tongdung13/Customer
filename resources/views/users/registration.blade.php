@@ -19,14 +19,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label>Date Of Birth</label>
+                    <label>Password</label>
                     <input type="password" name="password" class="form-control">
                 </div>
+
+
 
                 <button type="submit" class="btn btn-primary">Registration</button>
                 <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Cancel</button>

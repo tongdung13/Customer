@@ -24,16 +24,16 @@
                         </tr>
                         @else
 
-                        @foreach($citis as $key => $citie)
+                        @foreach($cities as $key => $citie)
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $citie->name }}</td>
                                 <td>{{ count($citie->customers) }}</td>
                                 <td>
-                                    <a href="{{ route('cities.edit', $citi->id) }}" class="btn btn-primary">Update</a>
+                                    <a href="{{ route('cities.edit', $citie->id) }}" class="btn btn-primary">Update</a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('cities.destroy', $citi->id) }}" onclick="return confirm('Do you want to delete ?')" class="btn btn-danger">Delete</a>
+                                    <a href="{{ route('cities.destroy', $citie->id) }}" onclick="return confirm('Do you want to delete ?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

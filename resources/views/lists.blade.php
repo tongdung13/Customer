@@ -113,8 +113,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									 <a href="{{ route('customers.index') }}"> <h1>Home</h1>
 									<!--<img id="logo" src="" alt="Logo"/>-->
                                   </a>
+                                 </div>
+                                  <a class="nav-link @if(Session::get('website_language') == 'en')
+                                  text-danger
+                                  @endif"
+                                  href="{ !! route('user.change-language',['en']) !! }">En<span class="sr-only">(current)</span></a>
+                                  <a class="nav-link @if(Session::get('website_language') == 'vi')
+                                  text-danger
+                                  @endif" href="{ !! route('user.change-language'), ['vi'] !!}">Vi</a>
 
-							</div>
 							<!--search-box-->
 								<div class="search-box">
                                     <form method="post" action="{{ route('customers.search') }}" enctype="multipart/form-data">
@@ -123,9 +130,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<input type="submit" value="">
 									</form>
                                 </div><!--//end-search-box-->
-                                <div class="logo-name">
-                                     <a href="{{ route('cities.index') }}"><h1>City</h1></a>
-                                </div>
 							<div class="clearfix"> </div>
 						 </div>
 						 <div class="header-right">
@@ -282,7 +286,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<ul class="dropdown-menu drp-mnu">
 											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
 											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+											<li> <a href="{{ route('users.logout') }}"><i class="fa fa-sign-out"></i> Logout</a> </li>
 										</ul>
 									</li>
 								</ul>
@@ -647,8 +651,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		          <li><a href="maps.html"><i class="fa fa-map-marker"></i><span>Maps</span></a></li>
 		        <li id="menu-academico" ><a href="#"><i class="fa fa-file-text"></i><span>Pages</span><span class="fa fa-angle-right" style="float: right"></span></a>
 		          <ul id="menu-academico-sub" >
-		          	 <li id="menu-academico-boletim" ><a href="login.html">Login</a></li>
-		            <li id="menu-academico-avaliacoes" ><a href="signup.html">Sign Up</a></li>
+		          	 <li id="menu-academico-boletim" ><a href="{{ route('users.index') }}">Login</a></li>
+		            <li id="menu-academico-avaliacoes" ><a href="{{ route('users.logout')  }}">Sign Up</a></li>
+		            <li id="menu-academico-avaliacoes" ><a href="{{ route('cities.index')  }}">City</a></li>
 		          </ul>
 		        </li>
 

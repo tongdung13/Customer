@@ -1,30 +1,20 @@
+
 @extends('lists')
 
-@section('title', 'List Customer')
+@section('title',__('messages.customer_list'))
 
 @section('content')
-    <a class="btn btn-outline-primary" href="" data-toggle="modal" data-target="#cityModal">
-        Loc
-    </a>
-         <div class="col-12">
-             @if(Session::has('success'))
-             <p class="text-success">
-                 <i class="fa fa-check" aria-hidden="true"></i>
-                 {{ Session::get('success') }}
-             </p>
-             @endif
+<div class="col-12">
+    <div class="row">
+        <div class="col-12">
+            @if(Session::has('success'))
+            <p class="text-success">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                {{ Session::get('success') }}
+            </p>
 
-             @if(isset($totalCustomerFilter))
-             <span class="text-muted">{{ "tim thay " . '' . $totalCustomerFilter . '' . 'khach hang'}}</span>
-             @endif
-
-             @if(isset($cityFilter))
-             <div class="pl-5">
-                 <span class="text-muted"><i class="fa fa-check" aria-hidden="true"></i>{{ 'thuoc tinh' . '' . $cityFilter->name }}</span>
-             </div>
-             @endif
-         </div>
-         </div>
+            @endif
+        </div>
 
 
             <div class="table">
@@ -32,21 +22,17 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Date Of Birth</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Image</th>
+                        <th scope="col">{{ __('messages.name') }}</th>
+                        <th scope="col">{{ __('messages.dob') }}</th>
+                        <th scope="col">{{ __('messages.email') }}</th>
+                        <th scope="col">{{ __('messages.city_id') }}</th>
+                        <th scope="col">{{ __('messages.image') }}</th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                        @if(count($customers) == 0)
-                        <tr>
-                            <td colspan="7" class="text-center">khong co du ieu</td>
-                        </tr>
-                        @else
+
                         @foreach($customers as $key => $customer)
                             <tr>
                                 <th scope="col">{{ ++$key }}</th>
@@ -56,84 +42,30 @@
                                 <td>{{ $customer->city->name }}</td>
                                 <td>
                                     <img src="{{ 'storage/' . $customer->image}}" style="width: 100px">
+
                                 </td>
                                 <td>
-                                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-primary">Update</a>
+                                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-primary">{{ __('messages.update') }}</a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('customers.destroy', $customer->id) }}" onclick="return confirm('Do you want to delete ?')" class="btn btn-danger">Delete</a>
+                                    <a href="{{ route('customers.destroy', $customer->id) }}" onclick="return confirm('Do you want to delete ?')" class="btn btn-danger">{{ __('messages.delete') }}</a>
                                 </td>
                             </tr>
                         @endforeach
-                    @endif
                     </tbody>
                 </table>
 
                 <div class="col-12">
                     <div class="row">
                         <div class="col-9">
-                            <a href="{{ route('customers.create') }}" class="btn btn-primary">ADD</a>
+                            <a href="{{ route('customers.create') }}" class="btn btn-primary">{{ __('messages.add') }}</a>
                         </div>
-                        <div class="col-3" style="width: 90px; font-size: 15px">
+                        <div class="col-3" style="text-align: right!important;">
                             {{ $customers->links() }}
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="cityModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <form action="{{ route('customers.filterByCity') }}" method="get">
-               @csrf
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <!--Lọc theo khóa học -->
-                        <div class="select-by-program">
-                            <div class="form-group row">
-                                <label class="col-sm-5 col-form-label border-right">Lọc khách hàng theo tỉnh thành</label>
-                                <div class="col-sm-7">
-                                    <select class="custom-select w-100" name="city_id">
-                                        <option value="">Chọn tỉnh thành</option>
-                                        @foreach($city as $value)
-                                            @if(isset($cityFilter))
-                                                @if($value->id == $cityFilter->id)
-                                                    <option value="{{$value->id}}" selected >{{ $value->name }}</option>
-                                                @else
-                                                    <option value="{{$value->id}}">{{ $value->name }}</option>
-                                                @endif
-                                            @else
-                                                <option value="{{$value->id}}">{{ $value->name }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- </form> -->
-                        </div>
-                        <!--End-->
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="submitAjax" class="btn btn-primary" >Chọn</button>
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
-
-
-
-
-
-
 @endsection

@@ -34,13 +34,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div id="particles-js"></div>
 	<!-- //particles -->
 	<div class="w3ls-pos">
-		<h1>Particles Login Form</h1>
+		<h1>Log in</h1>
 		<div class="w3ls-login box">
 			<!-- form starts here -->
-            <form action="{{ route('customers.index') }}" method="get" enctype="multipart/form-data">
+            <form action="{{ route('users.authenticate') }}" method="post" enctype="multipart/form-data">
                 @csrf
 				<div class="agile-field-txt">
-					<input type="email" name="email" placeholder="info@example.com" required="" />
+					<input type="text" name="name" placeholder="user name" class="form-control" required="" />
 				</div>
 				<div class="agile-field-txt">
 					<input type="password" name="password" placeholder="******" required="" id="myInput" />
@@ -54,7 +54,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input type="submit" value="LOGIN">
                 </div>
                  <div class="w3ls-bot">
-                     <a href="{{ route('users.create') }}">Registration</a>
+                     <a href="{{ route('users.create') }}" class="btn btn-success">Registration</a>
                 </div>
             </form>
 

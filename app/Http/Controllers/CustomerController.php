@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomerExampleRequest;
 use App\Models\City;
 use App\Models\Customer;
-use FFI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -18,21 +17,6 @@ class CustomerController extends Controller
         $city = City::all();
         return view('customers.list', compact('customers', 'city'));
     }
-
-    public function filterByCity(Request $request)
-    {
-        $idCity = $request->input('city_id');
-
-        $cityFilter = City::findOrFail($idCity);
-
-        $customers = Customer::where('city_id', $cityFilter->id)->get();
-        $totalCustomerFilter = count($customers);
-
-        $city = City::all();
-
-        return view('customers.list', compact('customers', 'city', 'totalCustomerFilter', 'cityFilter'));
-    }
-
 
     public function create()
     {
